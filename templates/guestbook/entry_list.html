@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>留言板</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; }
+    form { background: #f6f6f6; padding: 16px; border-radius: 8px; }
+    form div { margin-bottom: 12px; }
+    li { margin-bottom: 16px; }
+    .meta { color: #888; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>留言板</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">提交留言</button>
+  </form>
+
+  <hr>
+
+  <h2>全部留言（{{ entries|length }}）</h2>
+  <ul>
+    {% for e in entries %}
+      <li>
+        <strong>{{ e.author }}</strong>
+        <span class="meta">{{ e.created_at|date:"Y-m-d H:i" }}</span>
+        <div>{{ e.content|linebreaksbr }}</div>
+      </li>
+    {% empty %}
+      <li>还没有留言，来当第一个吧。</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
