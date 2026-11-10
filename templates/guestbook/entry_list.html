@@ -24,7 +24,7 @@
         <section class="panel guestbook" id="guestbook" aria-labelledby="guestbook-title">
           <h2 class="panel-title" id="guestbook-title">Guestbook</h2>
           <div class="panel-body">
-            <form id="guestbook-form" method="post" action="{% url 'entry_list' %}">
+            <form id="guestbook-form" method="post" action="{% url 'guestbook:entry_list' %}">
               {% csrf_token %}
               {{ form.non_field_errors }}
               <div class="form-top">
@@ -43,7 +43,7 @@
             </form>
             <div class="guestbook-heading">
               <h3>Messages(<span id="message-total">{{ paginator.count }}</span>)</h3>
-              <a href="{% url 'entry_list' %}?page={{ page_obj.number }}" id="refresh-messages" class="text-button">Refresh</a>
+              <a href="{% url 'guestbook:entry_list' %}?page={{ page_obj.number }}" id="refresh-messages" class="text-button">Refresh</a>
             </div>
             <div id="messages" aria-live="polite">
               {% for entry in entries %}
@@ -59,7 +59,7 @@
                 <p class="empty-state">Empty.</p>
               {% endfor %}
             </div>
-            <form id="pagination" class="pagination" method="get" action="{% url 'entry_list' %}" aria-label="messages pages">
+            <form id="pagination" class="pagination" method="get" action="{% url 'guestbook:entry_list' %}" aria-label="messages pages">
               {% if page_obj.has_previous %}
                 <a id="previous-page" class="text-button" href="?page={{ page_obj.previous_page_number }}">Prev</a>
               {% else %}

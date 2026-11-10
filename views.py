@@ -12,7 +12,7 @@ def entry_list(request):
         form.save()
         # 写库
         messages.success(request, "Posted.")
-        return redirect("entry_list")
+        return redirect("guestbook:entry_list")
         # 提交后重定向
 
     paginator = Paginator(Entry.objects.order_by("-created_at", "-pk"), 5)
